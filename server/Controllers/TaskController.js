@@ -107,7 +107,48 @@ catch (error) {
 }
 }
 
-
+export const UpdateTask= async(req,res)=>{
+    try {
+        
+    const {name,description,due_date}=req.body;
+    
+    if(!name||!description||!due_date)
+        return  res.status(400).send({message: "Invalid Credentials"});
+    
+    const {username}= req.params;
+    let _User= await User.findOne({username});
+    
+    const task= {
+    name,
+    description,
+    due_date    
+    };
+    
+     
+      _User.updateOne(
+              {
+                  $set: {
+                      Tasks:task,
+                  }
+              },
+              {}, { new: true }
+          )
+         return res.status(201).json({
+             success: true,
+             message: "product updated sucessfully"
+         })
+    } 
+    catch (error) {
+    
+        return res.status(400).json({
+            success: false,
+            message: error.message,
+        })
+    
+        
+    }
+    }
+    
 
 
 export const GetAllTasks= async(req,res)=>{
@@ -132,3 +173,4 @@ export const GetAllTasks= async(req,res)=>{
         
     }
     }
+    
