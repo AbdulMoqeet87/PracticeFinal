@@ -26,7 +26,7 @@ const handleChange = (e) => {
         
         const {data} = await axios.post(`http://localhost:5000/User/login`,FormData);
         
-        console.log("Success",data);
+        console.log("Success",data.message);
         
     } catch (error) {
         console.log("Error",error.message);

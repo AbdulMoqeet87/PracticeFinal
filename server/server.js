@@ -9,12 +9,7 @@ dotenv.config()
 app.use(express.json());
 
 app.use(
-    cors({
-        origin: 'https://localhost:3000',
-        methods: ['POST','GET','PUT','PATH'],
-        credentials:true,
-
-    })
+    cors()
 );
 app.use("/User",router);
 
